@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
+#include <stddef.h>
 
 const char values[13][3] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 const Suit suits[4] = {Heart, Club, Spade, Diamond};
@@ -33,8 +34,14 @@ char *card_to_string(Card *card)
     return str;
 }
 
-void fill_deck(Card deck[DECK_LENGTH])
+void fill_deck(Card *deck, size_t length)
 {
+    if (length != DECK_LENGTH)
+    {
+        perror("Invalid deck length");
+        exit(EXIT_FAILURE);
+    }
+
     for (int i = 0; i < 4; i++)
     {
         for (int j = 0; j < 13; j++)
@@ -42,11 +49,11 @@ void fill_deck(Card deck[DECK_LENGTH])
     }
 }
 
-void shuffle_deck(Card deck[DECK_LENGTH])
+void shuffle_deck(Card *deck, size_t length)
 {
     srand(time(NULL));
 
-    for (int i = DECK_LENGTH - 1; i > 0; i--)
+    for (int i = length - 1; i > 0; i--)
     {
         int j = rand() % (i + 1);
 
@@ -56,9 +63,9 @@ void shuffle_deck(Card deck[DECK_LENGTH])
     }
 }
 
-void show_deck(Card deck[DECK_LENGTH])
+void show_deck(Card *deck, size_t length)
 {
-    for (int i = 0; i < DECK_LENGTH; i++)
+    for (int i = 0; i < length; i++)
     {
         if (i % 13 == 0 && i != 0)
             printf("\n");
