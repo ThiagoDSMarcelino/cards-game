@@ -41,3 +41,17 @@ void FillDeck(Card deck[DECK_LENGTH])
             deck[i * 13 + j] = NewCard(suits[i], values[j]);
     }
 }
+
+void ShuffleDeck(Card deck[DECK_LENGTH])
+{
+    srand(time(NULL));
+
+    for (int i = DECK_LENGTH - 1; i > 0; i--)
+    {
+        int j = rand() % (i + 1);
+
+        Card temp = deck[i];
+        deck[i] = deck[j];
+        deck[j] = temp;
+    }
+}

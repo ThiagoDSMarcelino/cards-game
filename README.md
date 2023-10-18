@@ -1,8 +1,11 @@
 # CardsGame
 
 ## Build
+
 mkdir build && cd build && cmake ..
 
 ## Run code
+
 cd build/
-make && cd bin/ && ./program && cd ..
+
+make && bin/program

@@ -20,5 +20,6 @@ typedef struct
 Card NewCard(Suit suit, const char *value);
 char *CardToString(Card *card);
 void FillDeck(Card deck[DECK_LENGTH]);
+void ShuffleDeck(Card deck[DECK_LENGTH]);
 
 #endif // CARDS_H

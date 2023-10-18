@@ -9,6 +9,8 @@ int main()
 
     Card deck[DECK_LENGTH];
     FillDeck(deck);
+    ShuffleDeck(deck);
+
     for (int i = 0; i < DECK_LENGTH; i++)
     {
         if (i % 13 == 0 && i != 0)
