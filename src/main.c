@@ -7,8 +7,16 @@ int main()
 {
     setlocale(LC_ALL, "");
 
-    Card deck[52];
+    Card deck[DECK_LENGTH];
     FillDeck(deck);
+    for (int i = 0; i < DECK_LENGTH; i++)
+    {
+        if (i % 13 == 0 && i != 0)
+            printf("\n");
+
+        printf("%s ", CardToString(&deck[i]));
+    }
+    printf("\n");
 
     return 0;
 }

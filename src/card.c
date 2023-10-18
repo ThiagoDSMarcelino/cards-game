@@ -1,36 +1,43 @@
 #include "card.h"
-#include <stdio.h>
 #include <locale.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+#include <string.h>
 
-Card NewCard(Suit suit, char value)
+const char values[13][3] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+const Suit suits[4] = {Heart, Club, Spade, Diamond};
+
+Card NewCard(Suit suit, const char *value)
 {
     Card card;
     card.suit = suit;
-    card.value = value;
+    card.value = malloc(strlen(value) + 1);
+    strcpy(card.value, value);
 
     return card;
 }
 
-char *CardToString(Card *card) {
-    static char str[6];  // Tamanho arbitrário para a representação da string
+char *CardToString(Card *card)
+{
+    char *str = (char *)malloc(strlen(card->value) + 4);
 
-    snprintf(str, sizeof(str), "%c%lc", card->value, card->suit);
+    if (str == NULL)
+    {
+        perror("Invalid card pointer");
+        exit(EXIT_FAILURE);
+    }
+
+    snprintf(str, strlen(card->value) + 4, "%s%lc", card->value, card->suit);
 
     return str;
 }
 
-void FillDeck(Card deck[52])
+void FillDeck(Card deck[DECK_LENGTH])
 {
-    char values[13] = {'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'};
-    Suit suits[4] = {Heart, Club, Spade, Diamond};
-
     for (int i = 0; i < 4; i++)
     {
         for (int j = 0; j < 13; j++)
-        {
-            deck[i * j] = NewCard(suits[i], values[j]);
-            printf("%s ", CardToString(&deck[i * j]));
-        }
-        printf("\n");
+            deck[i * 13 + j] = NewCard(suits[i], values[j]);
     }
 }
