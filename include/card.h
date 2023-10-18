@@ -17,9 +17,11 @@ typedef struct
     char *value;
 } Card;
 
-Card NewCard(Suit suit, const char *value);
-char *CardToString(Card *card);
-void FillDeck(Card deck[DECK_LENGTH]);
-void ShuffleDeck(Card deck[DECK_LENGTH]);
+Card new_Card(Suit suit, const char *value);
+char *card_to_string(Card *card);
+
+void fill_deck(Card deck[DECK_LENGTH]);
+void shuffle_deck(Card deck[DECK_LENGTH]);
+void show_deck(Card deck[DECK_LENGTH]);
 
 #endif // CARDS_H
